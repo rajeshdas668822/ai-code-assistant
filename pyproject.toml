@@ -1,0 +1,19 @@
+[project]
+name = "ai-code-assistance"
+version = "0.1.0"
+description = "Multi-agent code assistant with LangGraph and Ollama"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "langchain-core==0.3.72",
+    "langchain-ollama==1.1.0",
+    "langgraph==0.6.1",
+    "python-dotenv==1.1.1",
+    "streamlit==1.47.1",
+]
+
+[project.optional-dependencies]
+# Only install these if you need OpenAI/Anthropic or RAG embeddings
+openai = ["langchain-openai==0.3.28"]
+anthropic = ["langchain-anthropic==1.4.0"]
+rag = ["sentence-transformers>=5.0.0", "torchvision>=0.26.0", "chromadb>=1.5.0"]

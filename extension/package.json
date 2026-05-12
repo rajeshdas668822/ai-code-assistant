@@ -1,0 +1,137 @@
+{
+  "name": "multi-agent-code-assistant",
+  "displayName": "Multi-Agent Code Assistant",
+  "description": "AI code assistant powered by local open-source LLMs with multi-agent orchestration",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Machine Learning"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "agent-assistant",
+          "title": "Agent Assistant",
+          "icon": "$(hubot)"
+        }
+      ]
+    },
+    "views": {
+      "agent-assistant": [
+        {
+          "type": "webview",
+          "id": "agentChat",
+          "name": "Chat"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "agent.explain",
+        "title": "Agent: Explain"
+      },
+      {
+        "command": "agent.refactor",
+        "title": "Agent: Refactor"
+      },
+      {
+        "command": "agent.fix",
+        "title": "Agent: Fix"
+      },
+      {
+        "command": "agent.generateTests",
+        "title": "Agent: Generate Tests"
+      },
+      {
+        "command": "agent.sendTerminalToChat",
+        "title": "Agent: Send Terminal to Chat"
+      },
+      {
+        "command": "agent.sendDiagnosticsToChat",
+        "title": "Agent: Send Diagnostics to Chat"
+      },
+      {
+        "command": "agent.toggleCompletion",
+        "title": "Agent: Toggle Completions"
+      },
+      {
+        "command": "agent.checkHealth",
+        "title": "Agent: Check Backend Connection"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "agent.explain",
+          "group": "agent@1"
+        },
+        {
+          "command": "agent.refactor",
+          "group": "agent@2"
+        },
+        {
+          "command": "agent.fix",
+          "group": "agent@3"
+        },
+        {
+          "command": "agent.generateTests",
+          "group": "agent@4"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Multi-Agent Code Assistant",
+      "properties": {
+        "multiAgentAssistant.backendUrl": {
+          "type": "string",
+          "default": "http://127.0.0.1:8000",
+          "description": "URL of the agent backend server"
+        },
+        "multiAgentAssistant.completionEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable inline code completions"
+        },
+        "multiAgentAssistant.completionDelay": {
+          "type": "number",
+          "default": 300,
+          "description": "Debounce delay (ms) before triggering completions"
+        },
+        "multiAgentAssistant.completionMaxTokens": {
+          "type": "number",
+          "default": 128,
+          "description": "Maximum tokens for completion responses"
+        },
+        "multiAgentAssistant.modelPreset": {
+          "type": "string",
+          "enum": [
+            "fast",
+            "balanced",
+            "quality"
+          ],
+          "default": "balanced",
+          "description": "Model preset configuration"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.0",
+    "eslint": "^8.56.0"
+  }
+}
